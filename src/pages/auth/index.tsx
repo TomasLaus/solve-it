@@ -1,3 +1,4 @@
+import AuthModal from '@/components/Modals/AuthModal';
 import Navbar from '@/components/Navbar/Navbar';
 import React from 'react';
 
@@ -15,6 +16,7 @@ const AuthPage: React.FC<AuthPageProps> = () => {
             // className='h-full pointer-events-auto'
           />
         </div>
+        <AuthModal />
       </div>
     </div>
   );
