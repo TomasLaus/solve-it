@@ -1,11 +1,14 @@
 import { auth } from '@/firebase/firebase';
+import { authModalState } from "@/atoms/AuthAtomModal";
 import Link from 'next/link';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import Logout from '../Buttons/Logout';
 
 type TopbarProps = {};
 
 const Topbar: React.FC<TopbarProps> = () => {
+    
   const [user] = useAuthState(auth);
   return (
     <nav className='relative flex h-[50px] w-full shrink-0 items-center px-5 bg-dark-layer-1 text-dark-gray-7'>
@@ -41,6 +44,7 @@ const Topbar: React.FC<TopbarProps> = () => {
               <button className='bg-dark-fill-3 py-1 px-2 cursor-pointer rounded '>Sign In</button>
             </Link>
           )}
+          {user && <Logout />}
         </div>
       </div>
     </nav>
