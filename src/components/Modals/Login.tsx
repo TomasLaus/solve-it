@@ -81,7 +81,7 @@ const Login: React.FC<LoginProps> = () => {
           placeholder='Password'
         />
         <button
-          className='absolute inset-y-0 top-12 right-5 flex items-center px-4 text-white hover:text-gray-300'
+          className='absolute right-[20px] bottom-[180px] left-[348px] text-white hover:text-gray-300 p-100 m-auto'
           onClick={togglePasswordVisibility}>
           {isPasswordVisible ? (
             <svg

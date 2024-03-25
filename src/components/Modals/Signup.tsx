@@ -102,7 +102,7 @@ const Signup: React.FC<SignupProps> = () => {
           placeholder='Password'
         />
         <button
-          className='absolute inset-y-10 top-[47%] right-5 flex items-center px-4 text-white hover:text-gray-300'
+          className='absolute top-[48%] right-5 flex items-center px-4 text-white hover:text-gray-300'
           onClick={togglePasswordVisibility}>
           {isPasswordVisible ? (
             <svg
