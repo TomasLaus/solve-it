@@ -5,6 +5,7 @@ import { useSetRecoilState } from 'recoil';
 import { auth } from '@/firebase/firebase';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 
 type LoginProps = {};
 
@@ -28,13 +29,13 @@ const Login: React.FC<LoginProps> = () => {
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!inputs.email || !inputs.password) return alert('Please fill in all fields');
+    if (!inputs.email || !inputs.password) return toast.error('Please fill in all fields', { position: 'top-center', autoClose: 3000, theme: 'dark' });
     try {
       const newUser = await signInWithEmailAndPassword(inputs.email, inputs.password);
       if (!newUser) return;
       router.push('/');
     } catch (error: any) {
-      alert(error.message);
+      toast.error(error.message, { position: 'top-center', autoClose: 3000, theme: 'dark' });
     }
   };
 
@@ -46,9 +47,9 @@ const Login: React.FC<LoginProps> = () => {
 
   useEffect(() => {
     if (error?.message === 'Firebase: Error (auth/user-not-found).')
-      return alert('User not found.');
+      toast.error('User not found.', { position: 'top-center', autoClose: 3000, theme: 'dark' });
     if (error?.message === 'Firebase: Error (auth/invalid-credential).')
-      return alert('Invalid credentials.');
+      toast.error('Invalid credentials.', { position: 'top-center', autoClose: 3000, theme: 'dark' });
   }, [error]);
 
 
