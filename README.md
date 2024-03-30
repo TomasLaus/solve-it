@@ -1,40 +1,72 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Solve It
 
-## Getting Started
+### Overview
 
-First, run the development server:
+Solve It is a project that aims to recreate the functionality of LeetCode, a popular platform for practicing coding problems. Utilizing modern web development technologies such as React, Next.js, TypeScript, Tailwind CSS, and Firebase, this project provides users with an environment to solve coding problems, store their solutions, and engage with a community of fellow programmers.
+
+## Features
+
+- **Authentication**: Users can sign up, log in, and reset their passwords securely.
+- **Problem Solving**: Access a collection of coding problems to solve.
+- **Code Editor**: Utilize a code editor to write and test solutions.
+- **Solution Storage**: Save and retrieve solutions for each problem.
+- **Community Engagement**: Like, dislike, and star problems, as well as engage with other users' solutions.
+- **Deployment**: Easily deploy the application using Vercel and Firebase.
+
+## Demo
+
+Check out the demo of the app [here](https://github.com/TomasLaus/solve-it).
+
+## Table of Contents
+
+- [Introduction](#solve-it)
+- [Overview](#overview)
+- [Features](#features)
+- [Demo](#demo)
+- [Setup](#setup)
+- [Usage](#usage)
+- [Deployment](#deployment)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Setup
+
+Follow these steps to set up the Solve It project locally:
+
+1. Clone the repository:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/TomasLaus/solve-it.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2.Install dependencies:
+```bash
+cd solve-it
+npm install
+```
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+3. Set up Firebase:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Create a Firebase project and obtain your Firebase configuration.
+Replace the Firebase configuration in the project's .env.local file.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+4. Start the development server:
+```bash
+npm run dev
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```
 
-## Learn More
+## Usage
+Once the project is set up, you can access it locally at http://localhost:3000. Here's a brief overview of how to navigate and use the app:
 
-To learn more about Next.js, take a look at the following resources:
+- Authentication: Sign up or log in to access the problem-solving features.
+- Problem Solving: Browse through available coding problems and select one to solve.
+- Code Editor: Write your solution in the provided code editor and test it against the problem's test cases.
+- Community Interaction: Engage with other users by liking, disliking, or starring problems and solutions.
+- Settings: Customize your experience by accessing the settings modal.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contributing
+Contributions to Solve It are welcome! Feel free to open issues or pull requests for any improvements or bug fixes.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## License
+This project is licensed under the MIT License.

@@ -36,6 +36,19 @@ export default function Home() {
           <ProblemsTable />
         </table>
       </div>
+
+    {/* temp form */}
+    <form className='p-6 flex flex-col max-w-sm gap-3'>
+      <input type="text" placeholder='problem id' name='id' />
+      <input type="text" placeholder='title' name='title' />
+      <input type="text" placeholder='difficulty' name='difficulty' />
+      <input type="text" placeholder='category' name='category' />
+      <input type="text" placeholder='order' name='order' />
+      <input type="text" placeholder='videoId?' name='videoId' />
+      <input type="text" placeholder='link?' name='link' />
+      <button className='bg-blue-500'>Save to DB</button>
+    </form>
+
     </main>
   );
 }
