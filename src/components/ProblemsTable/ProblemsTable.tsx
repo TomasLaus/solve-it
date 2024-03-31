@@ -1,4 +1,6 @@
-import { problems } from '@/mockProblems/problems';
+import { firestore } from '@/firebase/firebase';
+import { DBProblem } from '@/utils/types/problem';
+import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { AiFillYoutube } from 'react-icons/ai';
@@ -6,23 +8,27 @@ import { BsCheckCircle } from 'react-icons/bs';
 import { IoClose } from 'react-icons/io5';
 import YouTube from 'react-youtube';
 
-type ProblemsTableProps = {};
+type ProblemsTableProps = {
+  setLoadingProblems: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-const ProblemsTable: React.FC<ProblemsTableProps> = () => {
+const ProblemsTable: React.FC<ProblemsTableProps> = ({ setLoadingProblems }) => {
   const [youtubePlayer, setYoutubePlayer] = useState({
     isOpen: false,
     videoId: '',
   });
 
+  const problems = useGetProblems(setLoadingProblems);
+
   const closeModal = () => {
     setYoutubePlayer(() => ({ videoId: '', isOpen: false }));
-  }
+  };
 
   useEffect(() => {
-      window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeModal()
-      })
-  }, [])
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+  }, []);
   return (
     <>
       <tbody className='text-white'>
@@ -68,11 +74,17 @@ const ProblemsTable: React.FC<ProblemsTableProps> = () => {
 
       {youtubePlayer.isOpen && (
         <tfoot className='fixed top-0 left-0 h-screen w-screen flex items-center justify-center '>
-          <div className='bg-black z-10 opacity-70 top-0 left-0 w-screen h-screen absolute' onClick={closeModal}></div>
+          <div
+            className='bg-black z-10 opacity-70 top-0 left-0 w-screen h-screen absolute'
+            onClick={closeModal}></div>
           <div className='w-full z-50 h-full px-6 relative max-w-4xl'>
             <div className='w-full h-full flex items-center justify-center relative'>
               <div className='w-full relative'>
-                <IoClose fontSize={'35'} className='cursor-pointer absolute -top-16 right-0' onClick={closeModal} />
+                <IoClose
+                  fontSize={'35'}
+                  className='cursor-pointer absolute -top-16 right-0'
+                  onClick={closeModal}
+                />
                 <YouTube
                   videoId={youtubePlayer.videoId}
                   loading='lazy'
@@ -87,3 +99,25 @@ const ProblemsTable: React.FC<ProblemsTableProps> = () => {
   );
 };
 export default ProblemsTable;
+
+function useGetProblems(setLoadingProblems: React.Dispatch<React.SetStateAction<boolean>>) {
+  const [problems, setProblems] = useState<DBProblem[]>([]);
+
+  useEffect(() => {
+    const getProblems = async () => {
+      setLoadingProblems(true);
+      const q = query(collection(firestore, 'problems'), orderBy('order', 'asc'));
+      const querySnapshot = await getDocs(q);
+      const temp: DBProblem[] = [];
+      querySnapshot.forEach((doc) => {
+        temp.push({id: doc.id, ...doc.data()} as DBProblem);
+      })
+      setProblems(temp);
+      setLoadingProblems(false);
+    }
+
+    getProblems();
+  }, [setLoadingProblems]);
+
+  return problems;
+};
