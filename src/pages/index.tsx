@@ -2,10 +2,40 @@ import Image from 'next/image';
 import { Inter } from 'next/font/google';
 import Topbar from '@/components/Topbar/Topbar';
 import ProblemsTable from '@/components/ProblemsTable/ProblemsTable';
+import { useState } from 'react';
+import { doc, setDoc } from 'firebase/firestore';
+import { firestore } from '@/firebase/firebase';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
+  // const [inputs, setInputs] = useState({
+  //   id: '',
+  //   title: '',
+  //   difficulty: '',
+  //   category: '',
+  //   videoId: '',
+  //   link: '',
+  //   order: 0,
+  //   likes: 0,
+  //   dislikes: 0,
+  // })
+
+  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  // }
+
+  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   const newProblem = {
+  //     ...inputs,
+  //     order: Number(inputs.order),
+  //   }
+  //   console.log(inputs)
+  //   await setDoc(doc(firestore, 'problems', inputs.id), newProblem);
+  //   alert('Successfully added problem!');
+  // }
+
   return (
     <main className={`bg-dark-layer-2 min-h-screen`}>
       <Topbar />
@@ -36,18 +66,18 @@ export default function Home() {
           <ProblemsTable />
         </table>
       </div>
-
-    {/* temp form */}
-    <form className='p-6 flex flex-col max-w-sm gap-3'>
-      <input type="text" placeholder='problem id' name='id' />
-      <input type="text" placeholder='title' name='title' />
-      <input type="text" placeholder='difficulty' name='difficulty' />
-      <input type="text" placeholder='category' name='category' />
-      <input type="text" placeholder='order' name='order' />
-      <input type="text" placeholder='videoId?' name='videoId' />
-      <input type="text" placeholder='link?' name='link' />
+{/* 
+//add to DB form
+    <form className='p-6 flex flex-col max-w-sm gap-3' onSubmit={handleSubmit}>
+      <input onChange={handleInputChange} type="text" placeholder='problem id' name='id' />
+      <input onChange={handleInputChange} type="text" placeholder='title' name='title' />
+      <input onChange={handleInputChange} type="text" placeholder='difficulty' name='difficulty' />
+      <input onChange={handleInputChange} type="text" placeholder='category' name='category' />
+      <input onChange={handleInputChange} type="text" placeholder='order' name='order' />
+      <input onChange={handleInputChange} type="text" placeholder='videoId?' name='videoId' />
+      <input onChange={handleInputChange} type="text" placeholder='link?' name='link' />
       <button className='bg-blue-500'>Save to DB</button>
-    </form>
+    </form> */}
 
     </main>
   );
