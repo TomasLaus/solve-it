@@ -4,10 +4,11 @@ import React, { useEffect, useState } from 'react';
 
 import { useSetRecoilState } from 'recoil';
 
-import { auth } from '@/firebase/firebase';
+import { auth, firestore } from '@/firebase/firebase';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
+import { doc, setDoc } from 'firebase/firestore';
 
 type SignupProps = {};
 
@@ -35,16 +36,36 @@ const Signup: React.FC<SignupProps> = () => {
 
   useEffect(() => {
     if (error) alert(error.message);
-  }, [error])
+  }, [error]);
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!inputs.displayName || !inputs.email || !inputs.password) return toast.error('Please fill in all fields', { position: 'top-center', autoClose: 3000, theme: 'dark' });
+    if (!inputs.email || !inputs.password || !inputs.displayName)
+      return alert('Please fill all fields');
     try {
+      toast.loading('Creating your account', {
+        position: 'top-center',
+        toastId: 'loadingToast',
+        theme: 'dark',
+      });
       const newUser = await createUserWithEmailAndPassword(inputs.email, inputs.password);
       if (!newUser) return;
+      const userData = {
+        uid: newUser.user.uid,
+        email: newUser.user.email,
+        displayName: inputs.displayName,
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+        likedProblems: [],
+        dislikedProblems: [],
+        solvedProblems: [],
+        starredProblems: [],
+      };
+      await setDoc(doc(firestore, 'users', newUser.user.uid), userData);
       router.push('/');
     } catch (error: any) {
-      toast.error(error.message, { position: 'top-center', autoClose: 3000, theme: 'dark' });
+      toast.error(error.message, { position: 'top-center', theme: 'dark' });
+    } finally {
+      toast.dismiss('loadingToast');
     }
   };
 
@@ -53,7 +74,6 @@ const Signup: React.FC<SignupProps> = () => {
     e.preventDefault();
     setIsPasswordVisible((prevState) => !prevState);
   }
-
 
   return (
     <form className='space-y-6 px-6 pb-4' onSubmit={handleRegister}>
@@ -103,7 +123,7 @@ const Signup: React.FC<SignupProps> = () => {
           placeholder='Password'
         />
         <button
-          className='absolute top-[48%] right-5 flex items-center px-4 text-white hover:text-gray-300'
+          className='absolute top-[68%] right-5 flex items-center px-4 text-white hover:text-gray-300'
           onClick={togglePasswordVisibility}>
           {isPasswordVisible ? (
             <svg
