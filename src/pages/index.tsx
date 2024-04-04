@@ -5,11 +5,15 @@ import ProblemsTable from '@/components/ProblemsTable/ProblemsTable';
 import { useState } from 'react';
 import { doc, setDoc } from 'firebase/firestore';
 import { firestore } from '@/firebase/firebase';
+import useHasMounted from '@/hooks/useHasMounted';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
   const [loadingProblems, setLoadingProblems] = useState(true);
+  const hasMounted = useHasMounted();
+
+  if (!hasMounted) return null;
   // const [inputs, setInputs] = useState({
   //   id: '',
   //   title: '',
