@@ -28,8 +28,9 @@ const Playground: React.FC<PlaygroundProps> = ({ problem, setSuccess, setSolved 
   } = useRouter();
 
   useEffect(() => {
+    const code = localStorage.getItem(`code-${pid}`);
     if (user) {
-      setUserCode(problem.starterCode);
+      setUserCode(code ? JSON.parse(code) : problem.starterCode);
     } else {
       setUserCode(problem.starterCode);
     }
@@ -93,6 +94,7 @@ const Playground: React.FC<PlaygroundProps> = ({ problem, setSuccess, setSolved 
 
   const onChange = (value: string) => {
     setUserCode(value);
+    localStorage.setItem(`code-${pid}`, JSON.stringify(value));
   };
 
   return (
