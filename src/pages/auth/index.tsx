@@ -9,6 +9,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase/firebase';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import Link from 'next/link';
 
 type AuthPageProps = {};
 
@@ -27,17 +28,21 @@ const AuthPage: React.FC<AuthPageProps> = () => {
   if (pageLoading) return null;
 
   return (
-    <div className='bg-gradient-to-b from-gray-600 to-black h-screen relative'>
+    <div className='bg-gradient-to-b from-gray-600 to-black h-screen relative animate-fadeIn'>
       <div className='max-w-7xl mx-auto'>
         <Navbar />
-        <div className='flex items-center justify-center h-[calc(100vh-5rem)] pointer-events-none select-none'>
-          <Image
-            width={700}
-            height={700}
-            src='/hero.png'
-            alt='hero image'
-            // className='h-full pointer-events-auto'
-          />
+        <div className='flex items-center justify-center h-[calc(100vh-5rem)]'>
+          <div className='text-center text-white'>
+            <h1 className='text-4xl font-bold mb-4'>
+            Welcome to your problem-solving platform!
+            </h1>
+            <p className='text-lg mb-8'>
+            Practice your problem solving skills with challenging algorithms and improve your programming logic.
+            </p>
+            <Link href="/" className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 transform hover:scale-105">
+              Start now
+            </Link>
+          </div>
         </div>
         {authModal.isOpen && <AuthModal />}
       </div>
