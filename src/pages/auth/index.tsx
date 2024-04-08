@@ -41,9 +41,9 @@ const AuthPage: React.FC<AuthPageProps> = () => {
           Improve your development skills by training with code problems that challenge you and
           push your programming portfolio.
         </p>
-        <button className='bg-[#B13C3D] hover:bg-[#a74244] text-white font-bold py-2 px-4 rounded transition ease-in-out'>
+        <Link href='/' className='bg-[#B13C3D] hover:bg-[#a74244] text-white font-bold py-2 px-4 rounded transition ease-in-out'>
           Start now
-        </button>
+        </Link>
       </div>
   
       <div className='grid grid-cols-1 md:grid-cols-1 gap-8 text-[32px]'>
