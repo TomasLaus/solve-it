@@ -83,7 +83,7 @@ const AuthPage: React.FC<AuthPageProps> = () => {
             <p>The code challenges are graded from beginner to expert level.</p>
           </div>
           <div>
-            <Image src={home3} width={500} alt='problem solving' className='rounded removebg'/>
+            <Image src={home3} width={550} alt='problem solving' className='rounded removebg'/>
           </div>
         </div>
       </div>
