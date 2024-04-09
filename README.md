@@ -1,5 +1,9 @@
 # Solve It
 
+<div align="center">
+  <img alt="Demo" src="./public/demo.png" width="1200" />
+</div>
+
 ### Overview
 
 Solve It is a project that aims to recreate the functionality of LeetCode, a popular platform for practicing coding problems. Utilizing modern web development technologies such as React, Next.js, TypeScript, Tailwind CSS, and Firebase, this project provides users with an environment to solve coding problems, store their solutions, and engage with a community of fellow programmers.
@@ -15,7 +19,7 @@ Solve It is a project that aims to recreate the functionality of LeetCode, a pop
 
 ## Demo
 
-Check out the demo of the app [here](https://github.com/TomasLaus/solve-it).
+Check out the demo of the app [here](https://solve-it-js.vercel.app/).
 
 ## Table of Contents
 
